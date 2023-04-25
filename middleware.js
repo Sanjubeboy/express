@@ -38,7 +38,7 @@ router.get("/", (request, response) => {
 // }); 
 
 const middle = (req, res, next, id) => {
-  req.message = "Hii this is middleware!!"
+//   req.message = "Hii this is middleware!!"
   // req.details = {}
   next()
 }
@@ -50,7 +50,7 @@ router.route('/:uid')
 
   
   .get(middle,(request , response) => {
-    console.log(request.details.name)
+    // console.log(request.details.name)
     // response.send(`Get method on user page with id ${request.params.id} with name ${request.user.name}`)
     response.send(request.details)
     // response.send(request.message)
@@ -73,11 +73,19 @@ router.route('/:uid')
 const users = [
   {
     name:'Web Development',
-    age:200000
+    salary:200000
   },
   {
-    name:'kumar',
-    age:40
+    name:'App Development',
+    salary:400000
+  },
+  {
+    name:'Software Development',
+    salary:8000000
+  },
+  {
+    name:'Influencer',
+    salary:1000000
   }
 ]
 
