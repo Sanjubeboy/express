@@ -1,23 +1,32 @@
 const express = require('express')
 const app = express()
 
-// const home = require('./home.js')
-// const about = require('./about.js')
-
-// const contact = require('./contact.js')
-// const signup = require('./signup.js')
+// const search = require('./searchapi.js')
 const services = require('./services.js')
 const mware = require('./middleware.js')
+const cors = require('cors');
+// const user =  require('./apiserver.js')
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
 
+
+app.use(cors(corsOptions));
+// app.use(express.static('public'))
+
+
+app.set('view engine', 'ejs')
+
+app.use(express.urlencoded({extended:true}))
 
 app.get('/' , (request, response) => {
-    response.send("hello")
+    // response.send("hello")
+    response.render('index',{text:"sanjay", age:20})
 })
 
-// app.use('/home', home)
-// app.use('/about', about)
-// app.use('/contact', contact)
-// app.use('/signup', signup)
+console.log("API Working!!")
 app.use('/service', services)
 app.use('/middle', mware)
 

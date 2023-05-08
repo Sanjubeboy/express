@@ -2,9 +2,9 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get("/", (request, response) => {
-  response.send("FIND PAGE");
-});
+// router.get("/", (request, response) => {
+//   response.send("FIND PAGE");
+// });
 
 // let listitem = [
 //   {
@@ -37,19 +37,40 @@ router.get("/", (request, response) => {
 //   else response.status(500).send("Unknown Error!");
 // }); 
 
-const middle = (req, res, next, id) => {
+// const middle = (req, res, next, id) => {
 //   req.message = "Hii this is middleware!!"
   // req.details = {}
-  next()
-}
+//   next()
+// }
+router.use(express.static('public'))
+
+router.get('/', (req, res) => {
+  res.render('contact')
+})
+
+
+router.get('/new', (req, res) => {
+  res.render('users/new')
+})
+
+// const listuser = []
+
+let newid=3
+
+router.post('/', (req, res) => {
+  console.log(req.body.firstname)
+  users.push({name:req.body.firstname, salary:50000})
+  newid = newid+1
+  res.redirect(`/middle/${newid}`)
+})
+
+
+
+
 
 router.route('/:uid')
-
-
-
-
-  
-  .get(middle,(request , response) => {
+    
+  .get((request , response) => {
     // console.log(request.details.name)
     // response.send(`Get method on user page with id ${request.params.id} with name ${request.user.name}`)
     response.send(request.details)
@@ -65,9 +86,7 @@ router.route('/:uid')
     console.log(request.user)
     response.send(`Delete method on user page with id ${request.params.id}`)
   })
-  
-
-
+ 
 
 
 const users = [
@@ -80,7 +99,7 @@ const users = [
     salary:400000
   },
   {
-    name:'Software Development',
+    name:'Software Development',  
     salary:8000000
   },
   {
@@ -88,8 +107,6 @@ const users = [
     salary:1000000
   }
 ]
-
-
 
 
 //middleware executes between request and response.
@@ -100,4 +117,6 @@ router.param("uid", (request , response, next, userid) => {
 })
 
 
-module.exports = router;  
+module.exports = router;
+
+
