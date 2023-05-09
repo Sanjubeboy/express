@@ -4,6 +4,7 @@ const app = express()
 // const search = require('./searchapi.js')
 const services = require('./services.js')
 const mware = require('./middleware.js')
+const service = require('./service.js')
 const cors = require('cors');
 // const user =  require('./apiserver.js')
 const corsOptions ={
@@ -27,8 +28,9 @@ app.get('/' , (request, response) => {
 })
 
 console.log("API Working!!")
-app.use('/service', services)
+app.use('/services', services)
 app.use('/middle', mware)
+app.use('/service',service)
 
 
 app.listen(3500)
